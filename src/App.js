@@ -18,7 +18,7 @@ class App extends Component {
       { description: 'First', completed: false },
       { description: 'Second', completed: false },
       { description: 'Third', completed: false },
-      { description: 'Fouth', completed: false },
+      { description: 'Fourth', completed: false },
       { description: 'Fifth', completed: false }
     ]
   }
@@ -42,7 +42,7 @@ class App extends Component {
     })
   }
 
-  onToggleButton = (index) => {
+  onToggleButtonAtIndex = (index) => {
     this.setState((prevState) => {
       const beforeItems = prevState.buttons
       const afterItems = beforeItems.map((button, currentIndex) => {
@@ -52,6 +52,14 @@ class App extends Component {
           return button
       })
       return { buttons: afterItems }
+    })
+  }
+
+  onChangeButtonDescriptionAtIndex = (index, description) => {
+    this.setState(({ buttons }) => {
+      const button = buttons[index]
+      button.description = description
+      return { buttons }
     })
   }
 
@@ -73,7 +81,12 @@ class App extends Component {
           completed={ button.completed }
           onToggleCompleted={
             () => {
-              this.onToggleButton(index)
+              this.onToggleButtonAtIndex(index)
+            }
+          }
+          onDescriptionChange={
+            (description) => {
+              this.onChangeButtonDescriptionAtIndex(index, description)
             }
           }
       />
@@ -123,7 +136,7 @@ class App extends Component {
           <p>Completed</p>
           {
             buttons.map((button, index) => (
-                this.filterCompletedItems(button, index)
+              this.filterCompletedItems(button, index)
             ))
           }
           <p>Incomplete</p>

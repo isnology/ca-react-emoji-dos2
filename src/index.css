@@ -17,3 +17,7 @@ label {
 button {
   display: block;
 }
+
+.item {
+  display: flex;
+}

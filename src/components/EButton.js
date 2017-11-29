@@ -1,19 +1,24 @@
 import React from 'react'
 
-function EButton({ description, completed = false, onToggleCompleted }) {
+function EButton({ description, completed = false, onToggleCompleted, onDescriptionChange }) {
   return (
-    <button
-      type='button'
-      onClick={
-        (event) => {
-          onToggleCompleted()
+    <div className="item">
+      <button type='button'
+        onClick={ (event) => {
+            onToggleCompleted()
+          }
         }
-      }
-    >
-      { completed ? '✅' : '❎' }
-      {' '}
-      { description }
-    </button>
+      >
+        { completed ? '✅' : '❎' }
+      </button>
+      <input type="text"
+        onChange={ (event) => {
+            onDescriptionChange(event.target.value)
+          }
+        }
+        value={ description }
+      />
+    </div>
   )
 }
 
